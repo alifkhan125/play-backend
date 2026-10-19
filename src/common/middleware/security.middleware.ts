@@ -34,7 +34,7 @@ export function applySecurityMiddleware(app: Express): void {
   app.use(
     cors({
       origin(origin, callback) {
-        if (!origin || allowedOriginSet.has(origin)) {
+        if (!origin || allowedOriginSet.has('*') || allowedOriginSet.has(origin)) {
           callback(null, true);
           return;
         }

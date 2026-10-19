@@ -228,6 +228,7 @@ const environmentSchema = z
     }
 
     for (const origin of configuredOrigins) {
+      if (origin === '*') continue;
       try {
         const parsedOrigin = new URL(origin);
 

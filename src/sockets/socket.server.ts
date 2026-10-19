@@ -24,7 +24,7 @@ export function initializeSocketServer(
 ): Server {
   const io = new Server(httpServer, {
     cors: {
-      origin: [...corsOrigins],
+      origin: corsOrigins.includes('*') ? true : [...corsOrigins],
       credentials: true,
       methods: ['GET', 'POST'],
     },
