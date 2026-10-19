@@ -1,21 +1,21 @@
 import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const isWindows = process.platform === 'win32';
-const npmCommand = isWindows ? 'npm.cmd' : 'npm';
+const tsxCli = fileURLToPath(import.meta.resolve('tsx/cli'));
 
 const children = [
-  start('api', ['run', 'dev']),
-  start('worker', ['run', 'worker:dev']),
+  start('api', 'src/server.ts'),
+  start('worker', 'src/worker.ts'),
 ];
 
 let shuttingDown = false;
 
-function start(label, args) {
-  const child = spawn(npmCommand, args, {
+function start(label, entrypoint) {
+  const child = spawn(process.execPath, [tsxCli, 'watch', '--clear-screen=false', entrypoint], {
     cwd: process.cwd(),
     stdio: 'inherit',
     env: process.env,
-    shell: isWindows,
   });
 
   child.on('exit', (code, signal) => {
