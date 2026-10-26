@@ -14,8 +14,8 @@ import {
   updateContentPageBodySchema,
 } from './content-page.validation.js';
 
-export const contentPageRouter = Router();
-export const contentPageAdminRouter = Router();
+export const contentPageRouter: Router = Router();
+export const contentPageAdminRouter: Router = Router();
 
 contentPageRouter.get('/about-us', contentPageController.getAboutUs);
 contentPageRouter.get('/privacy-policy', contentPageController.getPrivacyPolicy);

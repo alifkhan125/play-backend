@@ -5,7 +5,7 @@ import { checkRedisHealth } from '../infrastructure/cache/redis-health.js';
 import { sendSuccess } from '../common/responses/api-response.js';
 import { asyncHandler } from '../common/utils/async-handler.js';
 
-export const healthRouter = Router();
+export const healthRouter: Router = Router();
 
 healthRouter.get(
   '/',

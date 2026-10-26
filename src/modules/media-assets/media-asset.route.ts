@@ -13,7 +13,7 @@ import {
   uploadIdParamsSchema,
 } from './media-asset.validation.js';
 
-export const mediaAssetRouter = Router();
+export const mediaAssetRouter: Router = Router();
 
 mediaAssetRouter.use(authenticate);
 

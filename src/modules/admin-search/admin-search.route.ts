@@ -6,7 +6,7 @@ import { adminSearchController } from './admin-search.controller.js';
 import { adminSearchQuerySchema } from './admin-search.validation.js';
 import { Router } from 'express';
 
-export const adminSearchRouter = Router();
+export const adminSearchRouter: Router = Router();
 
 adminSearchRouter.use(authenticate, authorize(UserRole.ADMIN, UserRole.MODERATOR, UserRole.SUPPORT, UserRole.FINANCE));
 

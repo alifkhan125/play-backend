@@ -18,7 +18,7 @@ import {
   adminUpdateNotificationBodySchema,
 } from './notification.validation.js';
 
-export const notificationRouter = Router();
+export const notificationRouter: Router = Router();
 
 notificationRouter.use(authenticate);
 

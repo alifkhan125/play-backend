@@ -17,7 +17,7 @@ import {
   verifyStripeSubscriptionPaymentSchema,
 } from './subscription.validation.js';
 
-export const subscriptionRouter = Router();
+export const subscriptionRouter: Router = Router();
 
 subscriptionRouter.get('/plans', requirePlatformFeature('subscriptions'), authenticate, subscriptionController.getPlans);
 

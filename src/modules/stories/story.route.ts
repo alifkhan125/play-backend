@@ -13,7 +13,7 @@ import {
   storyIdParamsSchema,
 } from './story.validation.js';
 
-export const storyRouter = Router();
+export const storyRouter: Router = Router();
 
 storyRouter.get('/', validateRequest({ query: storyFeedQuerySchema }), storyController.feed);
 storyRouter.get('/:storyId', validateRequest({ params: storyIdParamsSchema }), storyController.getById);

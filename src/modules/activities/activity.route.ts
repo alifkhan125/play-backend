@@ -2,6 +2,6 @@ import { Router } from 'express';
 import { authenticate } from '../../common/middleware/auth.middleware.js';
 import { activityController } from './activity.controller.js';
 
-export const activityRouter = Router();
+export const activityRouter: Router = Router();
 
 activityRouter.get('/', authenticate, activityController.getActivities);

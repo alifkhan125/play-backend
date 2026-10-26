@@ -16,8 +16,8 @@ import {
   creatorUserIdParamSchema,
 } from './creator.validation.js';
 
-export const creatorRouter = Router();
-export const creatorAdminRouter = Router();
+export const creatorRouter: Router = Router();
+export const creatorAdminRouter: Router = Router();
 
 creatorRouter.use(authenticate);
 creatorRouter.get('/me/eligibility', creatorController.eligibility);

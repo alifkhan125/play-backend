@@ -12,7 +12,7 @@ import { mediaCompleteBodySchema, mediaUploadUrlBodySchema } from './media.valid
 /**
  * Frontend-oriented media aliases that map onto the secure MediaAsset flow.
  */
-export const mediaRouter = Router();
+export const mediaRouter: Router = Router();
 
 mediaRouter.use(authenticate);
 

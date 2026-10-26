@@ -16,8 +16,8 @@ import {
   updateSupportRequestBodySchema,
 } from './support-request.validation.js';
 
-export const supportRequestRouter = Router();
-export const supportRequestAdminRouter = Router();
+export const supportRequestRouter: Router = Router();
+export const supportRequestAdminRouter: Router = Router();
 
 supportRequestRouter.use(authenticate);
 supportRequestRouter.get(

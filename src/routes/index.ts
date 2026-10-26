@@ -46,7 +46,7 @@ import {
 import { adminDashboardRouter } from '../modules/admin/admin.route.js';
 import { adminContentRouter } from '../modules/admin-content/admin-content.route.js';
 
-export const apiRouter = Router();
+export const apiRouter: Router = Router();
 
 apiRouter.use('/health', healthRouter);
 apiRouter.use('/auth', authRouter);

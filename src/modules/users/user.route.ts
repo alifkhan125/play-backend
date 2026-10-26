@@ -21,8 +21,8 @@ import {
   usernameProfileParamsSchema,
 } from './user.validation.js';
 
-export const userRouter = Router();
-export const userAdminRouter = Router();
+export const userRouter: Router = Router();
+export const userAdminRouter: Router = Router();
 
 userAdminRouter.use(authenticate, adminAuditMiddleware, authorize(UserRole.ADMIN, UserRole.MODERATOR, UserRole.SUPPORT));
 

@@ -15,7 +15,7 @@ import {
   targetUserIdParamSchema,
 } from './conversation.validation.js';
 
-export const conversationRouter = Router();
+export const conversationRouter: Router = Router();
 
 const attachmentUpload = multer({
   storage: multer.memoryStorage(),

@@ -49,7 +49,7 @@ const upload = multer({
   },
 });
 
-export const authRouter = Router();
+export const authRouter: Router = Router();
 
 authRouter.use(authAuditMiddleware);
 

@@ -8,7 +8,7 @@ import {
   listCreatorCategoriesQuerySchema,
 } from './creator-category.validation.js';
 
-export const creatorCategoryRouter = Router();
+export const creatorCategoryRouter: Router = Router();
 
 creatorCategoryRouter.use(authenticate);
 creatorCategoryRouter.get('/', validateRequest({ query: listCreatorCategoriesQuerySchema }), creatorCategoryController.list);

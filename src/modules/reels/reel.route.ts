@@ -17,7 +17,7 @@ import {
   searchReelsQuerySchema,
 } from './reel.validation.js';
 
-export const reelRouter = Router();
+export const reelRouter: Router = Router();
 
 reelRouter.get('/feed', optionalAuthenticate, validateRequest({ query: reelFeedQuerySchema }), reelController.feed);
 

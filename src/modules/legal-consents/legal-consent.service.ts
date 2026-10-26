@@ -7,8 +7,8 @@ import { legalConsentRepository } from './legal-consent.repository.js';
 import type { AcceptLegalConsentInput } from './legal-consent.validation.js';
 
 interface ConsentContext {
-  ipAddress?: string;
-  userAgent?: string;
+  ipAddress?: string | undefined;
+  userAgent?: string | undefined;
 }
 
 interface InitialLegalVersions {

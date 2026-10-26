@@ -6,7 +6,7 @@ import { authenticate } from '../../common/middleware/auth.middleware.js';
 import { musicController } from './music.controller.js';
 import { musicSearchQuerySchema, toggleSavedMusicSchema, getSavedMusicQuerySchema } from './music.validation.js';
 
-export const musicRouter = Router();
+export const musicRouter: Router = Router();
 
 musicRouter.get(
   '/tracks',

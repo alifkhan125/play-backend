@@ -5,7 +5,7 @@ import { validateRequest } from '../../common/middleware/validation.middleware.j
 import { occupationController } from './occupation.controller.js';
 import { createOccupationBodySchema, listOccupationsQuerySchema } from './occupation.validation.js';
 
-export const occupationRouter = Router();
+export const occupationRouter: Router = Router();
 
 occupationRouter.use(authenticate);
 occupationRouter.get('/', validateRequest({ query: listOccupationsQuerySchema }), occupationController.list);

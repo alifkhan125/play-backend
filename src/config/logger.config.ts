@@ -68,7 +68,7 @@ const redactionPaths = [
 const prettyLogs =
   env.NODE_ENV === 'development' && (env.LOG_PRETTY ?? process.stdout.isTTY);
 
-export const loggerConfig = {
+export const loggerConfig: LoggerOptions = {
   level: env.LOG_LEVEL ?? defaultLogLevel[env.NODE_ENV],
   base: {
     service: env.SERVICE_NAME,

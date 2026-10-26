@@ -899,28 +899,6 @@ export class AuthService {
     return pendingSignup;
   }
 
-  private pendingSignupUser(email: string): PublicUserDto {
-    const now = new Date().toISOString();
-    return {
-      id: '',
-      email,
-      role: 'user',
-      status: AccountStatus.ACTIVE,
-      isEmailVerified: false,
-      coinBalance: 0,
-      stripeConnectOnboardingComplete: false,
-      subscription: {
-        status: 'none',
-        isPremium: false,
-      },
-      profile: {
-        isSetupComplete: false,
-      },
-      createdAt: now,
-      updatedAt: now,
-    };
-  }
-
   private invalidCodeError(): BadRequestError {
     return new BadRequestError('Verification code is invalid.', {
       code: AUTH_ERROR_CODES.INVALID_CODE,

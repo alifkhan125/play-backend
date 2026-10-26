@@ -11,7 +11,7 @@ import {
   updateMonetizationSettingsBodySchema,
 } from './monetization.validation.js';
 
-export const monetizationAdminRouter = Router();
+export const monetizationAdminRouter: Router = Router();
 
 monetizationAdminRouter.use(authenticate, adminAuditMiddleware, authorize(UserRole.ADMIN, UserRole.FINANCE));
 monetizationAdminRouter.get('/dashboard', monetizationController.getDashboard);

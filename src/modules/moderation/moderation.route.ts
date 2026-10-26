@@ -14,8 +14,8 @@ import {
   reportTargetParamsSchema,
 } from './moderation.validation.js';
 
-export const moderationRouter = Router();
-export const moderationAdminRouter = Router();
+export const moderationRouter: Router = Router();
+export const moderationAdminRouter: Router = Router();
 
 moderationRouter.use(authenticate);
 

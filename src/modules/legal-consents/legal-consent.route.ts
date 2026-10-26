@@ -5,7 +5,7 @@ import { validateRequest } from '../../common/middleware/validation.middleware.j
 import { legalConsentController } from './legal-consent.controller.js';
 import { acceptLegalConsentBodySchema } from './legal-consent.validation.js';
 
-export const legalConsentRouter = Router();
+export const legalConsentRouter: Router = Router();
 
 legalConsentRouter.use(authenticate);
 legalConsentRouter.get('/current', legalConsentController.currentStatus);

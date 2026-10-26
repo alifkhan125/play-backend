@@ -20,7 +20,7 @@ import {
 } from './engagement.validation.js';
 
 // ── /api/v1/engagements ──────────────────────────────────────────────────────
-export const engagementRouter = Router();
+export const engagementRouter: Router = Router();
 
 // All engagement actions require authentication
 engagementRouter.use(authenticate);
@@ -78,7 +78,7 @@ engagementRouter.get(
 );
 
 // ── /api/v1/comments ──────────────────────────────────────────────────────────
-export const commentRouter = Router();
+export const commentRouter: Router = Router();
 
 commentRouter.use(authenticate);
 commentRouter.use(blockCommentsDuringKidsMode);
@@ -96,7 +96,7 @@ commentRouter.delete(
 );
 
 // ── /api/v1/me ────────────────────────────────────────────────────────────────
-export const savedRouter = Router();
+export const savedRouter: Router = Router();
 
 savedRouter.use(authenticate);
 
