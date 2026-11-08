@@ -19,7 +19,7 @@ import {
 
 export const subscriptionRouter: Router = Router();
 
-subscriptionRouter.get('/plans', requirePlatformFeature('subscriptions'), authenticate, subscriptionController.getPlans);
+subscriptionRouter.get('/plans', requirePlatformFeature('subscriptions'), subscriptionController.getPlans);
 
 subscriptionRouter.use(authenticate);
 subscriptionRouter.get('/me', requirePlatformFeature('subscriptions'), subscriptionController.getCurrentSubscription);
