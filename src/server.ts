@@ -7,15 +7,18 @@ import { connectRedis, disconnectRedis } from './infrastructure/cache/redis.clie
 import { logger } from './infrastructure/logger/logger.js';
 import { initializeSocketServer } from './sockets/socket.server.js';
 import { announcementService } from './modules/announcements/announcement.service.js';
+import { adSchedulerService } from './modules/ads/ad-scheduler.service.js';
 
 const server = createServer(app);
 const io = initializeSocketServer(server);
 let announcementStatusSyncTimer: NodeJS.Timeout | undefined;
+let adSchedulerTimer: NodeJS.Timeout | undefined;
 
 try {
   await connectDatabase();
   await connectRedis();
   startAnnouncementStatusSync();
+  startAdScheduler();
 
   server.listen(env.PORT, () => {
     logger.info(
@@ -61,6 +64,11 @@ async function closeInfrastructure(): Promise<void> {
     announcementStatusSyncTimer = undefined;
   }
 
+  if (adSchedulerTimer) {
+    clearInterval(adSchedulerTimer);
+    adSchedulerTimer = undefined;
+  }
+
   const [databaseResult, redisResult] = await Promise.allSettled([
     disconnectDatabase(),
     disconnectRedis(),
@@ -91,6 +99,24 @@ function startAnnouncementStatusSync(): void {
 
   void sync();
   announcementStatusSyncTimer = setInterval(() => {
+    void sync();
+  }, 60_000);
+}
+
+function startAdScheduler(): void {
+  const sync = async () => {
+    try {
+      const result = await adSchedulerService.processScheduledAds();
+      if (result.activated > 0 || result.expired > 0) {
+        logger.info(result, 'Ad campaign scheduled statuses synced');
+      }
+    } catch (error) {
+      logger.error({ err: error }, 'Ad campaign scheduled status sync failed');
+    }
+  };
+
+  void sync();
+  adSchedulerTimer = setInterval(() => {
     void sync();
   }, 60_000);
 }

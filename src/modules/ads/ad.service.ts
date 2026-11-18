@@ -5,6 +5,7 @@ import { env } from '../../config/env.config.js';
 import { stripe } from '../../config/stripe.config.js';
 import { adminNotificationService } from '../notifications/admin-notification.service.js';
 import { UserModel } from '../users/user.model.js';
+import { creatorEarningService } from '../monetization/creator-earning.service.js';
 import {
   adRepository,
   type AdMetricActor,
@@ -156,9 +157,16 @@ export class AdService {
     };
   }
 
-  async recordImpression(adId: string, actor: AdMetricActor) {
+  async recordImpression(adId: string, actor: AdMetricActor, context?: { reelId?: string; creatorId?: string }) {
     await this.requireAd(adId);
-    return this.ads.recordMetric(adId, 'impression', actor);
+    const result = await this.ads.recordMetric(adId, 'impression', actor);
+
+    // If an impression was recorded and creator details are provided, split revenue
+    if (result.recorded && context?.creatorId) {
+      void creatorEarningService.recordAdRevenueShare(adId, context.creatorId, context.reelId);
+    }
+
+    return result;
   }
 
   async recordClick(adId: string, actor: AdMetricActor) {

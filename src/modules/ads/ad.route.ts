@@ -18,6 +18,7 @@ import {
   listAdminAdsQuerySchema,
   listMyAdsQuerySchema,
   packageIdParamsSchema,
+  recordImpressionBodySchema,
   updateAdPackageBodySchema,
   updateAdCategoryBodySchema,
   verifyAdStripePaymentBodySchema,
@@ -29,7 +30,13 @@ export const adAdminRouter: Router = Router();
 adRouter.get('/packages', optionalAuthenticate, adController.getActivePackages);
 adRouter.get('/categories', optionalAuthenticate, adController.getActiveCategories);
 adRouter.get('/feed', requirePlatformFeature('ads'), optionalAuthenticate, validateRequest({ query: adFeedQuerySchema }), adController.feed);
-adRouter.post('/:adId/impressions', requirePlatformFeature('ads'), optionalAuthenticate, validateRequest({ params: adIdParamsSchema }), adController.recordImpression);
+adRouter.post(
+  '/:adId/impressions',
+  requirePlatformFeature('ads'),
+  optionalAuthenticate,
+  validateRequest({ params: adIdParamsSchema, body: recordImpressionBodySchema }),
+  adController.recordImpression,
+);
 adRouter.post('/:adId/clicks', requirePlatformFeature('ads'), optionalAuthenticate, validateRequest({ params: adIdParamsSchema }), adController.recordClick);
 
 adRouter.use(authenticate);

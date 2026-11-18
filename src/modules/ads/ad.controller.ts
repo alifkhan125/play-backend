@@ -53,7 +53,12 @@ export class AdController {
   });
 
   recordImpression = asyncHandler(async (request: Request, response: Response) => {
-    const result = await adService.recordImpression(param(request, 'adId'), metricActor(request));
+    const { reelId, creatorId } = request.body || {};
+    const result = await adService.recordImpression(
+      param(request, 'adId'),
+      metricActor(request),
+      { reelId, creatorId },
+    );
     return sendSuccess(response, 200, 'Ad impression recorded.', result);
   });
 

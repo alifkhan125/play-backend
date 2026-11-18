@@ -85,6 +85,14 @@ export const categoryIdParamsSchema = z
   })
   .strict();
 
+export const recordImpressionBodySchema = z
+  .object({
+    reelId: z.string().length(24).optional(),
+    creatorId: z.string().length(24).optional(),
+  })
+  .strict()
+  .optional();
+
 export const createAdPackageBodySchema = z
   .object({
     name: z.string().trim().min(1).max(100),

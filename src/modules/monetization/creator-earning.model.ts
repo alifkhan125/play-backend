@@ -1,15 +1,16 @@
 import mongoose, { Schema, model, type HydratedDocument, type Model, type Types } from 'mongoose';
 
 export type CreatorEarningStatus = 'pending' | 'available' | 'held' | 'paid' | 'reversed';
-export type CreatorEarningSource = 'reel_views';
+export type CreatorEarningSource = 'reel_views' | 'ad_revenue';
 
 export interface CreatorEarning {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
   reelId?: Types.ObjectId;
+  adCampaignId?: Types.ObjectId;
   source: CreatorEarningSource;
   sourceKey: string;
-  eligibleViews: number;
+  eligibleViews?: number;
   payoutRateUsd: number;
   creatorSharePercent: number;
   grossUsd: number;
@@ -28,9 +29,10 @@ const creatorEarningSchema = new Schema<CreatorEarning>(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
     reelId: { type: Schema.Types.ObjectId, ref: 'Reel', index: true },
-    source: { type: String, enum: ['reel_views'], required: true, index: true },
+    adCampaignId: { type: Schema.Types.ObjectId, ref: 'AdCampaign', index: true },
+    source: { type: String, enum: ['reel_views', 'ad_revenue'], required: true, index: true },
     sourceKey: { type: String, required: true, trim: true },
-    eligibleViews: { type: Number, required: true, min: 1 },
+    eligibleViews: { type: Number, min: 1 },
     payoutRateUsd: { type: Number, required: true, min: 0 },
     creatorSharePercent: { type: Number, required: true, min: 0, max: 100 },
     grossUsd: { type: Number, required: true, min: 0 },
